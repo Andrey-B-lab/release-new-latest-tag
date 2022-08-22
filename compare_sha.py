@@ -65,19 +65,19 @@ def get_harbor_staging_sha(harbor_repo_name):
     return(harbor_latest_sha)
 
 #Harbor  STG replications numbers
-job_numbers = {'captain-credit-admin-api': 15,
-        'captain-credit-admin-client': 16,
-        'captain-credit-app-client': 31,
-        'captain-credit-app-server': 30,
+job_numbers = {'my-app-admin-api': 15,
+        'my-app-admin-client': 16,
+        'my-app-client': 31,
+        'my-app-server': 30,
         'service-request-throttle': 11,
-        'il-finavo-digifi': 26,
-        'dbshop-gateway-api': 8,
-        'id-validation-service': 9,
-        'il-dbshop-bff': 43,
-        'membersite-client': 5,
-        'notification-service': 2,
-        'user-management-api': 10,
-        'il-payment-service': 37,
+        'finavo-digifi': 26,
+        'website-gateway-api': 8,
+        'website-validation-service': 9,
+        'websitep-bff': 43,
+        'website-client': 5,
+        'website-notification-service': 2,
+        'website-user-management-api': 10,
+        'website-payment-service': 37,
         'test-octopus-deploy': 38}
 
 # If HARBOR sha and ECR sha are different, activate replication and proceed to the next Octopus runbook step
