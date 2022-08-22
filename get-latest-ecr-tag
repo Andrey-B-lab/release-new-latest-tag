@@ -21,7 +21,7 @@ ecr_response = client.describe_images(
 ecr_latest_sha = (ecr_response['imageDetails'][0]['imageDigest'])
 
 #PRINT ECR LATEST IMAGE TAG
-tag_pattern = r"[0-99][\\.][0-99][\\.][0-9999]"
+tag_pattern = r"[0-9][\\.][0-99][\\.][0-9999]"
 tag_list = (ecr_response['imageDetails'][0]['imageTags'])
 tag = ''.join(tag_list)
 ecr_release_tag = re.search(pattern = tag_pattern, string= tag)
