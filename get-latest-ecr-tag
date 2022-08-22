@@ -1,0 +1,30 @@
+import boto3
+import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.SecurityWarning)
+import json
+import re
+
+client = boto3.client('ecr', region_name=get_octopusvariable("aws_region_name")', aws_access_key_id= get_octopusvariable("aws_access_key_id"), aws_secret_access_key= get_octopusvariable("aws_secret_access_key_runbook"))
+ecr_response = client.describe_images(
+    registryId=get_octopusvariable("registryId"),
+    repositoryName=get_octopusvariable("Octopus.Project.Name"),
+    imageIds=[
+        {
+        'imageTag': 'latest'
+        },
+    ],
+    filter={
+        'tagStatus': 'TAGGED'
+        }
+    )
+ecr_latest_sha = (ecr_response['imageDetails'][0]['imageDigest'])
+
+#PRINT ECR LATEST IMAGE TAG
+tag_pattern = r"[0-9][\\.][0-9][\\.][0-9]"
+tag = (ecr_response['imageDetails'][0]['imageTags'])
+ecr_image_tag = (tag[0])
+ecr_release_tag = re.search(pattern = tag_pattern, string= ecr_image_tag)
+octopus_latest_release_tag = ecr_release_tag.group(0)
+print(octopus_latest_release_tag)
+set_octopusvariable("ecr_latest_release_tag", octopus_latest_release_tag)
