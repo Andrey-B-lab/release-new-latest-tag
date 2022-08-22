@@ -1,0 +1,4 @@
+#!bin/bash
+sleep 5 &
+cd /home/devops/OctopusCLI
+./octo create-release --server=https://octopus.mydomain.co.il/ --apiKey=$(get_octopusvariable "octopus_api_key") --project=$(get_octopusvariable "Octopus.Project.Name") --releaseNumber=$(get_octopusvariable "Octopus.Action[get_latest_ecr_image_tag].Output.ecr_latest_release_tag")
